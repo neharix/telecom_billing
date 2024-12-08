@@ -1,0 +1,22 @@
+@font-face {
+    font-family: Exo;
+    src: url("/static/fonts/exo/Exo2-Regular.ttf");
+}
+
+@font-face {
+    font-family: Exo-Bold;
+    src: url("/static/fonts/exo/Exo2-Bold.ttf");
+}
+
+@font-face {
+    font-family: Montserrat-Alternates;
+    src: url("/static/fonts/montserrat-alternative/MontserratAlternates-ExtraBold.ttf");
+}
+
+* {
+    font-family: Exo;
+}
+
+td {
+    vertical-align: middle;
+}

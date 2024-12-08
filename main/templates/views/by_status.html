@@ -1,0 +1,36 @@
+{% extends "layouts/main_layout.html" %}
+{% load static %}
+	{% block head %}
+		<link rel="stylesheet" href="{% static 'css/main.css' %}">
+		{% include "components/favicon.html" %}
+	{% endblock head %}
+	{% block title %}
+		Esasy
+	{% endblock title %}
+
+	{% block body %}
+		<main>
+			<div class="d-flex align-items-center my-3" id="categories-row">
+				<div class="c-btn">
+					<a href="/devices/ST/" class="stable-color">Durnukly</a>
+				</div>
+				<div class="c-btn">
+					<a href="/devices/ER/" class="stable-color">Näsazlyk</a>
+				</div>
+				<div class="c-btn">
+					<a href="/devices/FC/" class="stable-color">Düzedilmez ýagdaýda</a>
+				</div>
+			</div>
+			<div id="cards-box">
+				{% for device_type in device_types %}
+				<div class="my-2 d-header">{{ device_type.name }}</div>
+				<div class="row cards py-4 mx-auto" id="{{ device_type.short }}"></div>
+				{% endfor %}
+			</div>
+		</main>
+	</div>
+	{% endblock body %}
+	{% block scripts %}
+    {{ status|json_script:"status" }}
+    <script src="{% static 'js/by_status.js' %}"></script>
+	{% endblock scripts %}
