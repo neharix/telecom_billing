@@ -1,3 +1,6 @@
+import datetime
+
+import pytz
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -7,7 +10,6 @@ class Client(models.Model):
     phone_number = models.CharField(max_length=20, unique=True)
     balance = models.FloatField()
     appraisal = models.ForeignKey("Appraisal", on_delete=models.CASCADE)
-    packages = models.ManyToManyField("Package", blank=True)
     services = models.ManyToManyField("Service", blank=True)
 
     def __str__(self):
@@ -21,7 +23,6 @@ class Client(models.Model):
 class Appraisal(models.Model):
     name = models.CharField(max_length=250)
     price = models.FloatField()
-    description = models.TextField()
 
     def __str__(self):
         return self.name
@@ -34,7 +35,6 @@ class Appraisal(models.Model):
 class Service(models.Model):
     name = models.CharField(max_length=250)
     price = models.FloatField()
-    description = models.TextField()
 
     def __str__(self):
         return self.name
@@ -47,7 +47,6 @@ class Service(models.Model):
 class Package(models.Model):
     name = models.CharField(max_length=250)
     price = models.FloatField()
-    description = models.TextField()
 
     def __str__(self):
         return self.name
@@ -55,3 +54,16 @@ class Package(models.Model):
     class Meta:
         verbose_name = "bukja"
         verbose_name_plural = "bukjalar"
+
+
+class ClientPackage(models.Model):
+    package = models.ForeignKey("Package", on_delete=models.CASCADE)
+    client = models.ForeignKey("Client", on_delete=models.CASCADE)
+    ends_at = models.DateTimeField()
+
+    class Meta:
+        verbose_name = "ulanyjy bukjasy"
+        verbose_name_plural = "ulanyjy bukjalary"
+
+    def __str__(self):
+        return f"{self.client.full_name} {self.package.name} {self.ends_at}"

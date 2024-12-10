@@ -15,6 +15,12 @@ class PackageAdmin(admin.ModelAdmin):
     readonly_fields = ("id",)
 
 
+@admin.register(ClientPackage)
+class PackageAdmin(admin.ModelAdmin):
+    list_display = ["client", "package"]
+    readonly_fields = ("id",)
+
+
 @admin.register(Appraisal)
 class AppraisalAdmin(admin.ModelAdmin):
     list_display = ["name", "price"]
